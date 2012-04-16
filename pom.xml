@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.saucelabs</groupId>
+    <artifactId>arquillian-sauce-drone</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <properties>
+        <version.arquillian.drone>1.0.0.Final-SNAPSHOT</version.arquillian.drone>
+        <version.selenium-client-factory>2.4</version.selenium-client-factory>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-webdriver</artifactId>
+            <version>${version.arquillian.drone}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-selenium</artifactId>
+            <version>${version.arquillian.drone}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.saucelabs.selenium</groupId>
+            <artifactId>selenium-client-factory</artifactId>
+            <version>${version.selenium-client-factory}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.saucelabs.selenium</groupId>
+            <artifactId>sauce-ondemand-driver</artifactId>
+            <version>${version.selenium-client-factory}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.core</groupId>
+            <artifactId>arquillian-core-spi</artifactId>
+            <version>${version.arquillian.drone}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.test</groupId>
+            <artifactId>arquillian-test-spi</artifactId>
+            <version>${version.arquillian.drone}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.config</groupId>
+            <artifactId>arquillian-config-api</artifactId>
+            <version>${version.arquillian.drone}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.6</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <version>${version.arquillian.drone}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+
+</project>
