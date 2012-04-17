@@ -10,6 +10,7 @@
 
     <properties>
         <version.arquillian.drone>1.0.0.Final-SNAPSHOT</version.arquillian.drone>
+        <version.arquillian>1.0.0.CR7</version.arquillian>
         <version.selenium-client-factory>2.4</version.selenium-client-factory>
     </properties>
 
@@ -19,6 +20,27 @@
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-drone-webdriver</artifactId>
             <version>${version.arquillian.drone}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.0-SP4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.faces</groupId>
+            <artifactId>jboss-jsf-api_2.0_spec</artifactId>
+            <version>1.0.0.Final</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -42,17 +64,22 @@
         <dependency>
             <groupId>org.jboss.arquillian.core</groupId>
             <artifactId>arquillian-core-spi</artifactId>
-            <version>${version.arquillian.drone}</version>
+            <version>${version.arquillian}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.test</groupId>
             <artifactId>arquillian-test-spi</artifactId>
-            <version>${version.arquillian.drone}</version>
+            <version>${version.arquillian}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-container-test-api</artifactId>
+            <version>${version.arquillian}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.config</groupId>
             <artifactId>arquillian-config-api</artifactId>
-            <version>${version.arquillian.drone}</version>
+            <version>${version.arquillian}</version>
         </dependency>
 
         <dependency>
@@ -65,7 +92,7 @@
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>${version.arquillian.drone}</version>
+            <version>${version.arquillian}</version>
             <scope>test</scope>
         </dependency>
 
