@@ -1,8 +1,8 @@
 package com.saucelabs.drone.selenium;
 
 import com.saucelabs.drone.AbstractSauceFactory;
-import com.saucelabs.sauce_ondemand.driver.SauceOnDemandSPIImpl;
-import com.saucelabs.selenium.client.factory.SeleniumFactory;
+import com.saucelabs.drone.SauceConfiguration;
+import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
 import org.jboss.arquillian.config.descriptor.api.ArquillianDescriptor;
 import org.jboss.arquillian.drone.spi.Configurator;
@@ -10,16 +10,15 @@ import org.jboss.arquillian.drone.spi.Destructor;
 import org.jboss.arquillian.drone.spi.Instantiator;
 
 import java.lang.annotation.Annotation;
-import java.text.MessageFormat;
 
 /**
  * @author Ross Rowe
  */
-public class SauceSeleniumFactory extends AbstractSauceFactory implements Configurator<Selenium, SauceSeleniumConfiguration>,
-        Instantiator<Selenium, SauceSeleniumConfiguration>, Destructor<Selenium> {
+public class SauceSeleniumFactory extends AbstractSauceFactory implements Configurator<Selenium, SauceConfiguration>,
+        Instantiator<Selenium, SauceConfiguration>, Destructor<Selenium> {
 
-    public SauceSeleniumConfiguration createConfiguration(ArquillianDescriptor descriptor, Class<? extends Annotation> qualifier) {
-        return new SauceSeleniumConfiguration().configure(descriptor, qualifier);
+    public SauceConfiguration createConfiguration(ArquillianDescriptor descriptor, Class<? extends Annotation> qualifier) {
+        return new SauceConfiguration(SauceConfiguration.ConfigurationType.SELENIUM).configure(descriptor, qualifier);
     }
 
     public int getPrecedence() {
@@ -31,26 +30,30 @@ public class SauceSeleniumFactory extends AbstractSauceFactory implements Config
         instance.stop();
     }
 
-    public Selenium createInstance(SauceSeleniumConfiguration configuration) {
-        //use selenium-client-factory to create DefaultSelenium instance
-        //if url defined in environment variable/system property, then use that
-        //if not, construct url
-        String driver = readPropertyOrEnv("SELENIUM_DRIVER");
-        if (driver == null) {
-            driver = MessageFormat.format(
-                    FACTORY_URL,
-                    configuration.getUserName(),
-                    configuration.getAccessKey(),
-                    configuration.getTimeout(),
-                    configuration.getOperatingSystem(),
-                    configuration.getBrowser(),
-                    configuration.getVersion());
-            //set property for host and port
-            System.setProperty("SELENIUM_HOST", configuration.getServerHost());
-            System.setProperty("SELENIUM_PORT", String.valueOf(configuration.getServerPort()));
-        }
-        SeleniumFactory factory = new SeleniumFactory().setUri(driver);
-        return new SauceOnDemandSPIImpl().createSelenium(factory, configuration.getUrl());
+    /**
+     * @param configuration
+     * @return
+     */
+    public Selenium createInstance(SauceConfiguration configuration) {
+
+        String username = readPropertyOrEnv("SAUCE_USER_NAME", configuration.getUserName());
+        String apiKey = readPropertyOrEnv("SAUCE_API_KEY", configuration.getAccessKey());
+        String host = readPropertyOrEnv("SELENIUM_HOST", configuration.getServerHost());
+        String port = readPropertyOrEnv("SELENIUM_HOST", configuration.getServerHost());
+        String browser = readPropertyOrEnv("SELENIUM_BROWSER", configuration.getBrowser());
+        String version = readPropertyOrEnv("SELENIUM_VERSION", configuration.getVersion());
+        String os = readPropertyOrEnv("SELENIUM_PLATFORM", configuration.getOs());
+        String startingUrl = readPropertyOrEnv("SELENIUM_STARTING_URL", configuration.getUrl());
+        DefaultSelenium selenium = new DefaultSelenium(
+                host,
+                Integer.valueOf(port),
+                "{\"username\": \"" + username + "\"," +
+                        "\"access-key\": \"" + apiKey + "\"," +
+                        "\"os\": \"" + os + "\"," +
+                        "\"browser\": \"" + browser + "\"," +
+                        "\"browser-version\": \"" + version + "\"}",
+                startingUrl);
+        return selenium;
     }
 
 

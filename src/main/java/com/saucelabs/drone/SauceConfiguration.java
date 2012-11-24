@@ -1,18 +1,41 @@
 package com.saucelabs.drone;
 
+import org.jboss.arquillian.config.descriptor.api.ArquillianDescriptor;
+import org.jboss.arquillian.drone.configuration.ConfigurationMapper;
+import org.jboss.arquillian.drone.spi.DroneConfiguration;
+
+import java.lang.annotation.Annotation;
+
 /**
  * @author Ross Rowe
  */
-public class SauceConfiguration {
+public class SauceConfiguration implements DroneConfiguration<SauceConfiguration> {
+
+    public enum ConfigurationType {
+        WEBDRIVER("sauce-webdriver"), SELENIUM("sauce-selenium");
+        private String type;
+
+        ConfigurationType(String type) {
+            this.type = type;
+        }
+    }
+
+    private String serverPort = "80";
+
     protected String userName;
     protected String accessKey;
     protected String browser;
-    protected String operatingSystem;
+    protected String os;
     protected String version;
     private String url = "http://localhost:8080";
     private String serverHost = "ondemand.saucelabs.com";
     private int timeout = 60000;
     private int speed = 0;
+    private ConfigurationType configurationType;
+
+    public SauceConfiguration(ConfigurationType configurationType) {
+        this.configurationType = configurationType;
+    }
 
     public String getUserName() {
         return userName;
@@ -38,12 +61,12 @@ public class SauceConfiguration {
         this.browser = browser;
     }
 
-    public String getOperatingSystem() {
-        return operatingSystem;
+    public String getOs() {
+        return os;
     }
 
-    public void setOperatingSystem(String operatingSystem) {
-        this.operatingSystem = operatingSystem;
+    public void setOs(String os) {
+        this.os = os;
     }
 
     public String getVersion() {
@@ -85,4 +108,22 @@ public class SauceConfiguration {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+
+    public String getConfigurationName() {
+        return configurationType.type;
+    }
+
+    public SauceConfiguration configure(ArquillianDescriptor descriptor, Class<? extends Annotation> qualifier) {
+        ConfigurationMapper.fromArquillianDescriptor(descriptor, this, qualifier);
+        return ConfigurationMapper.fromSystemConfiguration(this, qualifier);
+    }
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(String serverPort) {
+        this.serverPort = serverPort;
+    }
+
 }

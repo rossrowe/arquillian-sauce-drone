@@ -9,18 +9,11 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <version.arquillian.drone>1.0.0.Final-SNAPSHOT</version.arquillian.drone>
-        <version.arquillian>1.0.0.CR7</version.arquillian>
-        <version.selenium-client-factory>2.4</version.selenium-client-factory>
+        <version.arquillian.drone>1.1.0.Final</version.arquillian.drone>
+        <version.arquillian>1.0.3.Final</version.arquillian>
     </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-drone-webdriver</artifactId>
-            <version>${version.arquillian.drone}</version>
-        </dependency>
 
         <dependency>
             <groupId>javax.enterprise</groupId>
@@ -50,18 +43,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.saucelabs.selenium</groupId>
-            <artifactId>selenium-client-factory</artifactId>
-            <version>${version.selenium-client-factory}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.saucelabs.selenium</groupId>
-            <artifactId>sauce-ondemand-driver</artifactId>
-            <version>${version.selenium-client-factory}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.jboss.arquillian.core</groupId>
             <artifactId>arquillian-core-spi</artifactId>
             <version>${version.arquillian}</version>
@@ -85,7 +66,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.6</version>
+            <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -96,7 +77,26 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-webdriver-depchain</artifactId>
+            <version>${version.arquillian.drone}</version>
+            <type>pom</type>
+        </dependency>
+
     </dependencies>
+
+    <scm>
+        <connection>scm:git:git://github.com/rossrowe/arquillian-sauce-drone.git</connection>
+        <developerConnection>scm:git:git@github.com:rossrowe/arquillian-sauce-drone.git</developerConnection>
+        <url>git@github.com:rossrowe/arquillian-sauce-drone.git</url>
+    </scm>
+    <distributionManagement>
+        <repository>
+            <id>cloudbees-private-release-repository</id>
+            <url>dav:https://repository-saucelabs.forge.cloudbees.com/release</url>
+        </repository>
+    </distributionManagement>
 
 
 </project>

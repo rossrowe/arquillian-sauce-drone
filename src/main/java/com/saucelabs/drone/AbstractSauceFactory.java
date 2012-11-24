@@ -5,13 +5,16 @@ package com.saucelabs.drone;
  */
 public abstract class AbstractSauceFactory {
 
-    protected static final String FACTORY_URL = "sauce-ondemand:username={0}&access-key={1}&max-duration={2}&os={3}&browser={4}&version={5}";
+    protected static final String URL_FORMAT = "http://{0}:{1}@{2}:{3}/wd/hub";
 
-    protected String readPropertyOrEnv(String key) {
+    protected String readPropertyOrEnv(String key, String defaultValue) {
         String v = System.getProperty(key);
         if (v == null)
             v = System.getenv(key);
 
+        if (v == null) {
+            v = defaultValue;
+        }
         return v;
     }
 }
