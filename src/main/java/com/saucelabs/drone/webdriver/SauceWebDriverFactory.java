@@ -29,6 +29,7 @@ public class SauceWebDriverFactory extends AbstractSauceFactory
     private static final Logger log = Logger.getLogger(SauceWebDriverFactory.class.getName());
 
     public SauceConfiguration createConfiguration(ArquillianDescriptor descriptor, Class<? extends Annotation> qualifier) {
+        log.log(Level.INFO, "Configuring SauceWebDriverFactory");
         return new SauceConfiguration(SauceConfiguration.ConfigurationType.WEBDRIVER).configure(descriptor, qualifier);
     }
 
