@@ -6,6 +6,7 @@ To use the library, add the following dependency to your Maven pom.xml file
         <groupId>com.saucelabs</groupId>
         <artifactId>arquillian-sauce-drone</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <scope>test</scope>
     </dependency>
 
     <repositories>
