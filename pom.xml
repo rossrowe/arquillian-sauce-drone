@@ -4,7 +4,7 @@
 
     <groupId>com.saucelabs</groupId>
     <artifactId>arquillian-sauce-drone</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
 
     <properties>
         <version.arquillian.drone>1.1.0.Final</version.arquillian.drone>
