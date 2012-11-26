@@ -5,6 +5,7 @@ import com.saucelabs.drone.SauceConfiguration;
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
 import org.jboss.arquillian.config.descriptor.api.ArquillianDescriptor;
+import org.jboss.arquillian.drone.selenium.configuration.SeleniumConfiguration;
 import org.jboss.arquillian.drone.spi.Configurator;
 import org.jboss.arquillian.drone.spi.Destructor;
 import org.jboss.arquillian.drone.spi.Instantiator;
@@ -18,7 +19,10 @@ public class SauceSeleniumFactory extends AbstractSauceFactory implements Config
         Instantiator<Selenium, SauceConfiguration>, Destructor<Selenium> {
 
     public SauceConfiguration createConfiguration(ArquillianDescriptor descriptor, Class<? extends Annotation> qualifier) {
-        return new SauceConfiguration(SauceConfiguration.ConfigurationType.SELENIUM).configure(descriptor, qualifier);
+        SauceConfiguration sauceConfiguration = new SauceConfiguration(SauceConfiguration.ConfigurationType.SELENIUM);
+        SeleniumConfiguration seleniumConfiguration = new SeleniumConfiguration().configure(descriptor, qualifier);
+        sauceConfiguration.setSeleniumConfiguration(seleniumConfiguration);
+        return sauceConfiguration.configure(descriptor, qualifier);
     }
 
     public int getPrecedence() {

@@ -2,7 +2,9 @@ package com.saucelabs.drone;
 
 import org.jboss.arquillian.config.descriptor.api.ArquillianDescriptor;
 import org.jboss.arquillian.drone.configuration.ConfigurationMapper;
+import org.jboss.arquillian.drone.selenium.configuration.SeleniumConfiguration;
 import org.jboss.arquillian.drone.spi.DroneConfiguration;
+import org.jboss.arquillian.drone.webdriver.configuration.TypedWebDriverConfiguration;
 
 import java.lang.annotation.Annotation;
 
@@ -20,6 +22,10 @@ public class SauceConfiguration implements DroneConfiguration<SauceConfiguration
         }
     }
 
+    private TypedWebDriverConfiguration webDriverConfiguration;
+    private SeleniumConfiguration seleniumConfiguration;
+
+
     private String serverPort = "80";
 
     protected String userName;
@@ -32,6 +38,7 @@ public class SauceConfiguration implements DroneConfiguration<SauceConfiguration
     private int timeout = 60000;
     private int speed = 0;
     private ConfigurationType configurationType;
+
 
     public SauceConfiguration(ConfigurationType configurationType) {
         this.configurationType = configurationType;
@@ -124,6 +131,18 @@ public class SauceConfiguration implements DroneConfiguration<SauceConfiguration
 
     public void setServerPort(String serverPort) {
         this.serverPort = serverPort;
+    }
+
+    public void setWebDriverConfiguration(TypedWebDriverConfiguration webDriverConfiguration) {
+        this.webDriverConfiguration = webDriverConfiguration;
+    }
+
+    public TypedWebDriverConfiguration getWebDriverConfiguration() {
+        return webDriverConfiguration;
+    }
+
+    public void setSeleniumConfiguration(SeleniumConfiguration seleniumConfiguration) {
+        this.seleniumConfiguration = seleniumConfiguration;
     }
 
 }
