@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 /**
  * @author Ross Rowe
  */
-public class DroneWebDriverExtension implements LoadableExtension {
+public class SauceDroneWebDriverExtension implements LoadableExtension {
 
-    private static final Logger log = Logger.getLogger(DroneWebDriverExtension.class.getName());
+    private static final Logger log = Logger.getLogger(SauceDroneWebDriverExtension.class.getName());
 
     public void register(ExtensionBuilder builder) {
 
